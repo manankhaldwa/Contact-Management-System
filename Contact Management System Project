@@ -1,0 +1,131 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Initialize a map to store contacts
+map<string, string> contacts;
+
+void addContact(const string &name, const string &phone)
+{
+  contacts[name] = phone;
+  cout << "Contact '" << name << "' added." << endl;
+}
+
+void viewContacts()
+{
+  if (contacts.empty())
+  {
+    cout << "No contacts available." << endl;
+  }
+  else
+  {
+    cout << "Contacts:" << endl;
+    for (const auto &contact : contacts)
+    {
+      cout << "Name: " << contact.first << ", Phone: " << contact.second << endl;
+    }
+  }
+}
+
+void editContact(const string &name, const string &newPhone)
+{
+  if (contacts.find(name) != contacts.end())
+  {
+    contacts[name] = newPhone;
+    cout << "Contact '" << name << "' updated." << endl;
+  }
+  else
+  {
+    cout << "Contact '" << name << "' not found." << endl;
+  }
+}
+
+void searchContact(const string &name)
+{
+  if (contacts.find(name) != contacts.end())
+  {
+    cout << "Found contact: Name: " << name << ", Phone: " << contacts[name] << endl;
+  }
+  else
+  {
+    cout << "Contact '" << name << "' not found." << endl;
+  }
+}
+
+void deleteContact(const string &name)
+{
+  if (contacts.erase(name))
+  {
+    cout << "Contact '" << name << "' deleted." << endl;
+  }
+  else
+  {
+    cout << "Contact '" << name << "' not found." << endl;
+  }
+}
+
+int main()
+{
+  while (true)
+  {
+    cout << "\nContact Management System" << endl;
+    cout << "1. Add Contact" << endl;
+    cout << "2. View Contacts" << endl;
+    cout << "3. Edit Contact" << endl;
+    cout << "4. Search Contact" << endl;
+    cout << "5. Delete Contact" << endl;
+    cout << "6. Exit" << endl;
+
+    int choice;
+    cout << "Choose an option (1-6): ";
+    cin >> choice;
+    cin.ignore(); // To ignore the newline character after the choice
+
+    if (choice == 1)
+    {
+      string name, phone;
+      cout << "Enter contact name: ";
+      getline(cin, name);
+      cout << "Enter contact phone: ";
+      getline(cin, phone);
+      addContact(name, phone);
+    }
+    else if (choice == 2)
+    {
+      viewContacts();
+    }
+    else if (choice == 3)
+    {
+      string name, newPhone;
+      cout << "Enter contact name to edit: ";
+      getline(cin, name);
+      cout << "Enter new phone number: ";
+      getline(cin, newPhone);
+      editContact(name, newPhone);
+    }
+    else if (choice == 4)
+    {
+      string name;
+      cout << "Enter contact name to search: ";
+      getline(cin, name);
+      searchContact(name);
+    }
+    else if (choice == 5)
+    {
+      string name;
+      cout << "Enter contact name to delete: ";
+      getline(cin, name);
+      deleteContact(name);
+    }
+    else if (choice == 6)
+    {
+      cout << "Exiting the Contact Management System." << endl;
+      break;
+    }
+    else
+    {
+      cout << "Invalid choice! Please choose a valid option." << endl;
+    }
+  }
+
+  return 0;
+}
